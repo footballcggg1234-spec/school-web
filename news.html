@@ -107,7 +107,7 @@
 
         async function fetchAllNews() {
             try {
-                const response = await fetch('http://localhost:5000/api/news');
+                const response = await fetch('/api/news');
                 allNews = await response.json();
                 renderNews(allNews); // แสดงข่าวทั้งหมด
             } catch (error) {

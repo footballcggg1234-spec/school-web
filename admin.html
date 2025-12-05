@@ -91,7 +91,7 @@
             tableContainer.innerHTML = '<p style="text-align:center;">กำลังโหลดข้อมูลนักเรียน...</p>';
             
             try {
-                const response = await fetch('/api/students'); 
+                const response = await fetch('/api/news');
                 const students = await response.json();
 
                 if (students.length === 0) {

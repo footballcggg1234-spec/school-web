@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>กิจการนักเรียน - RPK26</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- Theme Colors (เหมือนหน้าอื่น) --- */
+        :root {
+            --primary-red: #b30000;
+            --primary-yellow: #ffcc00;
+            --dark-blue: #002244;
+            --bg-gray: #f4f6f9;
+        }
+        body { font-family: 'Sarabun', sans-serif; margin: 0; background: var(--bg-gray); color: #333; }
+
+        /* --- Navbar --- */
+        .top-bar { background-color: var(--primary-red); padding: 8px 20px; display: flex; justify-content: flex-end; }
+        .top-bar a { color: white; text-decoration: none; font-size: 0.9rem; }
+        nav { background: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        .logo-text h1 { margin: 0; font-size: 1.5rem; color: var(--primary-red); }
+        .logo-text p { margin: 0; font-size: 0.9rem; color: #666; }
+        nav ul { list-style: none; display: flex; gap: 30px; margin: 0; }
+        nav a { text-decoration: none; color: var(--dark-blue); font-weight: 600; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--primary-red); border-bottom: 2px solid var(--primary-red); }
+
+        /* --- Header --- */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            height: 280px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 2.8rem; border-bottom: 4px solid var(--primary-yellow); padding-bottom: 10px; display: inline-block; }
+
+        /* --- Content --- */
+        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
+        
+        /* 3 Missions Grid */
+        .mission-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 60px; }
+        .mission-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            border-bottom: 4px solid transparent;
+        }
+        .mission-card:hover { transform: translateY(-10px); border-bottom-color: var(--primary-yellow); }
+        .mission-icon { font-size: 3rem; color: var(--primary-red); margin-bottom: 20px; }
+        .mission-card h3 { color: var(--dark-blue); margin-bottom: 10px; }
+
+        /* Section Title */
+        .section-title { text-align: center; margin-bottom: 40px; position: relative; }
+        .section-title h2 { font-size: 2rem; color: var(--dark-blue); background: var(--bg-gray); display: inline-block; padding: 0 20px; position: relative; z-index: 1; }
+        .section-title::after { content: ""; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: #ccc; z-index: 0; }
+
+        /* Rules & Regulations (Flex Layout) */
+        .rules-section { display: flex; gap: 40px; margin-bottom: 60px; }
+        .rules-img { flex: 1; }
+        .rules-img img { width: 100%; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .rules-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .rule-item { margin-bottom: 20px; display: flex; gap: 15px; align-items: flex-start; }
+        .rule-item i { color: var(--primary-yellow); background: var(--dark-blue); width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; flex-shrink: 0; }
+        .rule-item h4 { margin: 0 0 5px 0; font-size: 1.1rem; }
+        .rule-item p { margin: 0; color: #666; font-size: 0.9rem; }
+
+        /* Student Council Banner */
+        .council-banner {
+            background: var(--dark-blue);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .council-btn {
+            background: white; color: var(--dark-blue); padding: 10px 25px; text-decoration: none; border-radius: 30px; font-weight: bold; transition: 0.3s;
+        }
+        .council-btn:hover { background: var(--primary-yellow); color: black; }
+
+        footer { background: var(--dark-blue); color: white; text-align: center; padding: 20px; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar"><a href="login.html"><i class="fas fa-lock"></i> เข้าสู่ระบบเจ้าหน้าที่</a></div>
+    <nav>
+        <div class="logo-area">
+            <div style="width:40px; height:40px; background:var(--primary-red); border-radius:50%; display:flex; justify-content:center; align-items:center; color:white; font-weight:bold;">RPK</div>
+            <div class="logo-text"><h1>ราชประชานุเคราะห์ ๒๖</h1><p>จังหวัดลำพูน</p></div>
+        </div>
+        <ul>
+            <li><a href="index.html">หน้าแรก</a></li>
+            <li><a href="about.html">เกี่ยวกับโรงเรียน</a></li>
+            <li><a href="academics.html">วิชาการ</a></li>
+            <li><a href="student-affairs.html" class="active">กิจการนักเรียน</a></li>
+            <li><a href="admission.html">รับสมัครนักเรียน</a></li>
+            <li><a href="contact.html">ติดต่อเรา</a></li>
+        </ul>
+    </nav>
+
+    <header class="page-header">
+        <h1>กลุ่มบริหารงานกิจการนักเรียน</h1>
+    </header>
+
+    <div class="container">
+        
+        <div class="mission-grid">
+            <div class="mission-card">
+                <i class="fas fa-user-shield mission-icon"></i>
+                <h3>ดูแลความประพฤติ</h3>
+                <p>เสริมสร้างระเบียบวินัย คุณธรรม จริยธรรม และความเป็นระเบียบเรียบร้อยในโรงเรียน</p>
+            </div>
+            <div class="mission-card">
+                <i class="fas fa-home mission-icon"></i>
+                <h3>ดูแลระบบหอพัก</h3>
+                <p>บริหารจัดการหอพักนอนให้สะอาด ปลอดภัย และอบอุ่นเสมือนบ้านหลังที่สอง</p>
+            </div>
+            <div class="mission-card">
+                <i class="fas fa-hands-helping mission-icon"></i>
+                <h3>ระบบดูแลช่วยเหลือ</h3>
+                <p>เยี่ยมบ้านนักเรียน ทุนการศึกษา และการให้คำปรึกษาเพื่อป้องกันปัญหาต่างๆ</p>
+            </div>
+        </div>
+
+        <div class="section-title"><h2>ระเบียบวินัยที่ควรรู้</h2></div>
+        <div class="rules-section">
+            <div class="rules-img">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Thai_student_uniforms.jpg/800px-Thai_student_uniforms.jpg" alt="ระเบียบวินัย">
+            </div>
+            <div class="rules-content">
+                <div class="rule-item">
+                    <i class="fas fa-cut"></i>
+                    <div>
+                        <h4>ทรงผมและเครื่องแต่งกาย</h4>
+                        <p>นักเรียนชายตัดผมรองทรงสูง นักเรียนหญิงรวบผมให้เรียบร้อย ติดโบว์สีตามระดับชั้น</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>การมาโรงเรียน/เข้าแถว</h4>
+                        <p>โรงเรียนเข้าแถวเคารพธงชาติเวลา 07.45 น. นักเรียนต้องมาถึงก่อนเวลา 07.30 น.</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div>
+                        <h4>การใช้โทรศัพท์มือถือ</h4>
+                        <p>อนุญาตให้ใช้เฉพาะเวลาว่างและหลังเลิกเรียน ห้ามนำขึ้นอาคารเรียนขณะทำการเรียนการสอน</p>
+                    </div>
+                </div>
+                <div class="rule-item">
+                    <i class="fas fa-file-download"></i>
+                    <div>
+                        <h4>คู่มือนักเรียนและผู้ปกครอง</h4>
+                        <p><a href="#" style="color:var(--primary-red); font-weight:bold;">ดาวน์โหลด PDF (ฉบับเต็ม)</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="council-banner">
+            <div style="text-align:left;">
+                <h2 style="margin:0;">🗳️ สภานักเรียน ปีการศึกษา 2568</h2>
+                <p style="margin:5px 0 0 0; opacity:0.8;">ส่งเสริมประชาธิปไตย พัฒนาภาวะผู้นำ ร่วมสร้างสรรค์กิจกรรมโรงเรียน</p>
+            </div>
+            <a href="#" class="council-btn">ดูรายชื่อคณะกรรมการ →</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2025 โรงเรียนราชประชานุเคราะห์ ๒๖ จังหวัดลำพูน | ฝ่ายกิจการนักเรียน</p>
+    </footer>
+
+</body>
+</html>

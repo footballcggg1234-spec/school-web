@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>งานวิชาการ - RPK26</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- Theme Colors --- */
+        :root {
+            --primary-red: #b30000;
+            --primary-yellow: #ffcc00;
+            --dark-blue: #002244;
+            --bg-gray: #f8f9fa;
+        }
+        body { font-family: 'Sarabun', sans-serif; margin: 0; background: var(--bg-gray); color: #333; }
+
+        /* --- Navbar (ชุดเดิม) --- */
+        .top-bar { background-color: var(--primary-red); padding: 8px 20px; display: flex; justify-content: flex-end; }
+        .top-bar a { color: white; text-decoration: none; font-size: 0.9rem; }
+        nav { background: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        .logo-text h1 { margin: 0; font-size: 1.5rem; color: var(--primary-red); }
+        .logo-text p { margin: 0; font-size: 0.9rem; color: #666; }
+        nav ul { list-style: none; display: flex; gap: 30px; margin: 0; }
+        nav a { text-decoration: none; color: var(--dark-blue); font-weight: 600; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--primary-red); border-bottom: 2px solid var(--primary-red); }
+
+        /* --- Header --- */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 2.5rem; border-bottom: 4px solid var(--primary-yellow); padding-bottom: 10px; display: inline-block; }
+
+        /* --- Content Container --- */
+        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
+        
+        /* Section Title */
+        .section-title { text-align: center; margin-bottom: 40px; }
+        .section-title h2 { color: var(--dark-blue); font-size: 2rem; margin-bottom: 10px; }
+        .section-title p { color: #666; }
+
+        /* หลักสูตร (Curriculum Cards) */
+        .curriculum-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .curr-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border-top: 5px solid var(--primary-red);
+        }
+        .curr-card:hover { transform: translateY(-10px); }
+        .curr-img { height: 180px; background: #ddd; object-fit: cover; width: 100%; }
+        .curr-content { padding: 25px; }
+        .curr-content h3 { color: var(--primary-red); margin-top: 0; }
+        .curr-content ul { padding-left: 20px; color: #555; line-height: 1.8; }
+
+        /* 8 กลุ่มสาระ (Subject Grid) */
+        .subjects-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .subject-item {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .subject-item:hover { background: var(--primary-red); color: white; }
+        .subject-item:hover i { color: var(--primary-yellow); }
+        .subject-item i { font-size: 2.5rem; color: var(--primary-red); margin-bottom: 10px; transition: 0.3s; }
+        .subject-item span { display: block; font-weight: bold; }
+
+        /* Download Section */
+        .download-zone {
+            background: #002244;
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+        }
+        .dl-btn {
+            background: var(--primary-yellow);
+            color: var(--dark-blue);
+            padding: 12px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .dl-btn:hover { background: #e6b800; }
+
+        footer { background: var(--dark-blue); color: white; text-align: center; padding: 20px; margin-top: 50px; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .subjects-grid { grid-template-columns: repeat(2, 1fr); }
+            .download-zone { flex-direction: column; text-align: center; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar"><a href="login.html"><i class="fas fa-lock"></i> เข้าสู่ระบบเจ้าหน้าที่</a></div>
+    <nav>
+        <div class="logo-area">
+            <div style="width:40px; height:40px; background:var(--primary-red); border-radius:50%; display:flex; justify-content:center; align-items:center; color:white; font-weight:bold;">RPK</div>
+            <div class="logo-text"><h1>ราชประชานุเคราะห์ ๒๖</h1><p>จังหวัดลำพูน</p></div>
+        </div>
+        <ul>
+            <li><a href="index.html">หน้าแรก</a></li>
+            <li><a href="about.html">เกี่ยวกับโรงเรียน</a></li>
+            <li><a href="academics.html" class="active">วิชาการ</a></li>
+            <li><a href="student-affairs.html">กิจการนักเรียน</a></li>
+            <li><a href="admission.html">รับสมัครนักเรียน</a></li>
+            <li><a href="contact.html">ติดต่อเรา</a></li>
+        </ul>
+    </nav>
+
+    <header class="page-header">
+        <h1>กลุ่มบริหารงานวิชาการ</h1>
+    </header>
+
+    <div class="container">
+        
+        <div class="section-title">
+            <h2>หลักสูตรการเรียนการสอน</h2>
+            <p>มุ่งเน้นทักษะวิชาการควบคู่ทักษะอาชีพ ตามหลักปรัชญาของเศรษฐกิจพอเพียง</p>
+        </div>
+
+        <div class="curriculum-grid">
+            <div class="curr-card">
+                <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="curr-img" alt="ม.ต้น">
+                <div class="curr-content">
+                    <h3>📚 ระดับมัธยมศึกษาตอนต้น</h3>
+                    <p>เน้นการสำรวจความถนัดของตนเอง และปูพื้นฐานทักษะอาชีพ</p>
+                    <ul>
+                        <li>กลุ่มวิชาพื้นฐานเข้มข้น</li>
+                        <li>วิชาเลือกเสรีด้านงานอาชีพ</li>
+                        <li>กิจกรรมพัฒนาผู้เรียน</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="curr-card">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="curr-img" alt="ม.ปลาย">
+                <div class="curr-content">
+                    <h3>🔬 ระดับมัธยมศึกษาตอนปลาย</h3>
+                    <p>แบ่งแผนการเรียนเพื่อมุ่งสู่มหาวิทยาลัยและการประกอบอาชีพ</p>
+                    <ul>
+                        <li>แผนการเรียน วิทย์-คณิต</li>
+                        <li>แผนการเรียน ศิลป์-ภาษา</li>
+                        <li>แผนการเรียน ทวิศึกษา (เน้นอาชีพ)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h2>8 กลุ่มสาระการเรียนรู้</h2>
+        </div>
+        <div class="subjects-grid">
+            <div class="subject-item"><i class="fas fa-language"></i><span>ภาษาไทย</span></div>
+            <div class="subject-item"><i class="fas fa-calculator"></i><span>คณิตศาสตร์</span></div>
+            <div class="subject-item"><i class="fas fa-flask"></i><span>วิทยาศาสตร์ฯ</span></div>
+            <div class="subject-item"><i class="fas fa-globe-americas"></i><span>สังคมศึกษาฯ</span></div>
+            <div class="subject-item"><i class="fas fa-heartbeat"></i><span>สุขศึกษาฯ</span></div>
+            <div class="subject-item"><i class="fas fa-palette"></i><span>ศิลปะ</span></div>
+            <div class="subject-item"><i class="fas fa-tools"></i><span>การงานอาชีพ</span></div>
+            <div class="subject-item"><i class="fas fa-comments"></i><span>ภาษาต่างประเทศ</span></div>
+        </div>
+
+        <div class="download-zone">
+            <div>
+                <h3 style="margin:0 0 10px 0; font-size:1.5rem;">📅 ปฏิทินวิชาการ ปีการศึกษา 2568</h3>
+                <p style="margin:0; opacity:0.8;">ตรวจสอบวันสอบกลางภาค ปลายภาค และวันหยุดราชการ</p>
+            </div>
+            <a href="#" class="dl-btn"><i class="fas fa-download"></i> ดาวน์โหลดไฟล์ PDF</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2025 โรงเรียนราชประชานุเคราะห์ ๒๖ จังหวัดลำพูน | ฝ่ายวิชาการ</p>
+    </footer>
+
+</body>
+</html>

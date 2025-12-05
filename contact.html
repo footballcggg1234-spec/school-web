@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ติดต่อเรา - RPK26</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- Theme Colors --- */
+        :root {
+            --primary-red: #b30000;
+            --primary-yellow: #ffcc00;
+            --dark-blue: #002244;
+            --bg-gray: #f8f9fa;
+        }
+        body { font-family: 'Sarabun', sans-serif; margin: 0; background: var(--bg-gray); color: #333; }
+
+        /* --- Navbar --- */
+        .top-bar { background-color: var(--primary-red); padding: 8px 20px; display: flex; justify-content: flex-end; }
+        .top-bar a { color: white; text-decoration: none; font-size: 0.9rem; }
+        nav { background: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        .logo-text h1 { margin: 0; font-size: 1.5rem; color: var(--primary-red); }
+        .logo-text p { margin: 0; font-size: 0.9rem; color: #666; }
+        nav ul { list-style: none; display: flex; gap: 30px; margin: 0; }
+        nav a { text-decoration: none; color: var(--dark-blue); font-weight: 600; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--primary-red); border-bottom: 2px solid var(--primary-red); }
+
+        /* --- Header --- */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 3rem; margin: 0; border-bottom: 4px solid var(--primary-yellow); padding-bottom: 5px; }
+
+        /* --- Content Layout --- */
+        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        /* Left Column: Info */
+        .contact-info {
+            background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary-red);
+        }
+        .info-item { display: flex; align-items: flex-start; margin-bottom: 25px; }
+        .info-item i { 
+            font-size: 1.5rem; color: var(--primary-red); background: #ffe6e6; 
+            width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; 
+            border-radius: 50%; margin-right: 15px; 
+        }
+        .info-item h4 { margin: 0 0 5px 0; font-size: 1.1rem; color: var(--dark-blue); }
+        .info-item p { margin: 0; color: #555; line-height: 1.6; }
+
+        /* Right Column: Map & Form */
+        .map-container {
+            width: 100%; height: 250px; border-radius: 10px; overflow: hidden; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .contact-form {
+            background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .contact-form h3 { margin-top: 0; color: var(--primary-red); }
+        .form-group { margin-bottom: 15px; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; font-family: 'Sarabun';
+        }
+        .btn-send {
+            background: var(--dark-blue); color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-size: 1rem;
+        }
+        .btn-send:hover { background: #003366; }
+
+        footer { background: var(--dark-blue); color: white; text-align: center; padding: 20px; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar"><a href="login.html"><i class="fas fa-lock"></i> เข้าสู่ระบบเจ้าหน้าที่</a></div>
+    <nav>
+        <div class="logo-area">
+            <div style="width:40px; height:40px; background:var(--primary-red); border-radius:50%; display:flex; justify-content:center; align-items:center; color:white; font-weight:bold;">RPK</div>
+            <div class="logo-text"><h1>ราชประชานุเคราะห์ ๒๖</h1><p>จังหวัดลำพูน</p></div>
+        </div>
+        <ul>
+            <li><a href="index.html">หน้าแรก</a></li>
+            <li><a href="about.html">เกี่ยวกับโรงเรียน</a></li>
+            <li><a href="academics.html">วิชาการ</a></li>
+            <li><a href="student-affairs.html">กิจการนักเรียน</a></li>
+            <li><a href="admission.html" class="btn-apply">รับสมัครนักเรียน</a></li>
+            <li><a href="contact.html" class="active">ติดต่อเรา</a></li>
+        </ul>
+    </nav>
+
+    <header class="page-header">
+        <h1>ติดต่อเรา</h1>
+    </header>
+
+    <div class="container">
+        <div class="contact-grid">
+            
+            <div class="contact-column">
+                <div class="contact-info">
+                    <h2 style="margin-top:0; margin-bottom:20px; color:#333;">ช่องทางการติดต่อ</h2>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>ที่อยู่ไปรษณีย์</h4>
+                            <p>เลขที่ 485 หมู่ที่ 3 ตำบลน้ำดิบ<br>อำเภอป่าซาง จังหวัดลำพูน 51120</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>เบอร์โทรศัพท์</h4>
+                            <p>0-5355-5555 (ธุรการ)<br>0-5355-5556 (วิชาการ)</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>อีเมล</h4>
+                            <p>saraban@rpk26.ac.th<br>info@rpk26.ac.th</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fab fa-facebook-f"></i>
+                        <div>
+                            <h4>Facebook</h4>
+                            <p>โรงเรียนราชประชานุเคราะห์ ๒๖ จังหวัดลำพูน</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-column">
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3786.123456789!2d98.123456!3d18.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDM0JzU2LjciTiA5OMKwMDcnNDUuNiJF!5e0!3m2!1sth!2sth!4v1600000000000!5m2!1sth!2sth" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                    </div>
+
+                <div class="contact-form">
+                    <h3>ส่งข้อความถึงโรงเรียน</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="ชื่อ-นามสกุล ของท่าน" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="อีเมล หรือ เบอร์โทรติดต่อกลับ" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="4" placeholder="เรื่องที่ต้องการติดต่อ..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> ส่งข้อความ</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 โรงเรียนราชประชานุเคราะห์ ๒๖ จังหวัดลำพูน</p>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("✅ ส่งข้อความเรียบร้อยแล้ว! เจ้าหน้าที่จะติดต่อกลับโดยเร็วที่สุด");
+            this.reset();
+        });
+    </script>
+
+</body>
+</html>

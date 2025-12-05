@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เกี่ยวกับโรงเรียน - RPK26</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* ดึงสไตล์หลักมาใช้เพื่อให้ธีมเหมือนหน้าแรก */
+        :root {
+            --primary-red: #b30000;
+            --primary-yellow: #ffcc00;
+            --dark-blue: #002244;
+            --text-gray: #555;
+        }
+        body { font-family: 'Sarabun', sans-serif; margin: 0; padding: 0; color: #333; background: #fff; }
+
+        /* Navbar & Topbar (ก๊อปมาจาก index.html เพื่อความต่อเนื่อง) */
+        .top-bar { background-color: var(--primary-red); padding: 8px 20px; display: flex; justify-content: flex-end; gap: 20px; }
+        .top-bar a { color: white; text-decoration: none; font-size: 0.9rem; }
+        
+        nav { background: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        .logo-text h1 { margin: 0; font-size: 1.5rem; color: var(--primary-red); }
+        .logo-text p { margin: 0; font-size: 0.9rem; color: #666; }
+        nav ul { list-style: none; display: flex; gap: 30px; margin: 0; }
+        nav a { text-decoration: none; color: var(--dark-blue); font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--primary-red); }
+
+        /* Header เฉพาะหน้านี้ */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://upload.wikimedia.org/wikipedia/commons/e/e8/Angkor_Wat.jpg'); /* รูปปกเกี่ยวกับเรา */
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 2.5rem; margin: 0; border-bottom: 4px solid var(--primary-yellow); display: inline-block; padding-bottom: 10px; }
+
+        /* เนื้อหา */
+        .content-section { max-width: 1000px; margin: 60px auto; padding: 0 20px; display: flex; gap: 50px; align-items: center; }
+        .content-text { flex: 1; }
+        .content-text h2 { font-size: 2rem; color: var(--dark-blue); margin-top: 0; border-left: 5px solid var(--primary-red); padding-left: 15px; }
+        .content-text p { line-height: 1.8; color: var(--text-gray); font-size: 1.1rem; }
+        
+        .content-img { flex: 1; }
+        .content-img img { width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+
+        /* Vision & Mission Cards */
+        .vm-section { background: #f9f9f9; padding: 60px 20px; text-align: center; }
+        .vm-grid { max-width: 1000px; margin: 40px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .vm-card { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-top: 5px solid var(--primary-red); transition: transform 0.3s; }
+        .vm-card:hover { transform: translateY(-5px); }
+        .vm-card i { font-size: 3rem; color: var(--primary-yellow); margin-bottom: 20px; }
+        .vm-card h3 { font-size: 1.5rem; margin: 10px 0; color: var(--dark-blue); }
+
+        /* Footer */
+        footer { background: var(--dark-blue); color: white; text-align: center; padding: 20px; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="login.html"><i class="fas fa-lock"></i> เข้าสู่ระบบเจ้าหน้าที่</a>
+    </div>
+
+    <nav>
+        <div class="logo-area">
+            <div style="width:50px; height:50px; background:var(--primary-red); border-radius:50%; display:flex; justify-content:center; align-items:center; color:white; font-weight:bold;">RPK</div>
+            <div class="logo-text">
+                <h1>ราชประชานุเคราะห์ ๒๖</h1>
+                <p>จังหวัดลำพูน</p>
+            </div>
+        </div>
+        <ul>
+            <li><a href="index.html">หน้าแรก</a></li>
+            <li><a href="about.html" class="active">เกี่ยวกับโรงเรียน</a></li>
+            <li><a href="academics.html">วิชาการ</a></li>
+            <li><a href="index.html">กิจการนักเรียน</a></li>
+            <li><a href="admission.html">รับสมัครนักเรียน</a></li>
+            <li><a href="contact.html">ติดต่อเรา</a></li>
+        </ul>
+    </nav>
+
+    <header class="page-header">
+        <h1>เกี่ยวกับโรงเรียน</h1>
+    </header>
+
+    <div class="content-section">
+        <div class="content-text">
+            <h2>ประวัติความเป็นมา</h2>
+            <p>
+                โรงเรียนราชประชานุเคราะห์ ๒๖ จังหวัดลำพูน จัดตั้งขึ้นเพื่อเฉลิมพระเกียรติพระบาทสมเด็จพระเจ้าอยู่หัว 
+                เนื่องในวโรกาสฉลองสิริราชสมบัติครบ 50 ปี เพื่อสงเคราะห์เด็กด้อยโอกาสทางการศึกษา 
+                ให้ได้รับบริการการศึกษาขั้นพื้นฐานแบบอยู่ประจำ กินนอน โดยไม่มีค่าใช้จ่าย
+            </p>
+            <p>
+                โรงเรียนมุ่งเน้นการฝึกทักษะอาชีพ เพื่อให้ผู้เรียนสามารถนำความรู้ไปประกอบอาชีพ
+                และพึ่งพาตนเองได้ในอนาคต ตามปรัชญา "การศึกษาเพื่อชีวิต"
+            </p>
+        </div>
+        <div class="content-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/School_in_Thailand.jpg/800px-School_in_Thailand.jpg" alt="รูปโรงเรียน">
+        </div>
+    </div>
+
+    <div class="vm-section">
+        <h2 style="color:var(--dark-blue); font-size:2rem;">ทิศทางการพัฒนาคุณภาพการศึกษา</h2>
+        <div class="vm-grid">
+            <div class="vm-card">
+                <i class="fas fa-eye"></i>
+                <h3>วิสัยทัศน์ (Vision)</h3>
+                <p>"รักษ์ศักดิ์ศรี มีคุณธรรม นำวิชาการ สืบสานงานพระราชดำริ"</p>
+            </div>
+            <div class="vm-card">
+                <i class="fas fa-bullseye"></i>
+                <h3>พันธกิจ (Mission)</h3>
+                <p>ส่งเสริมโอกาสทางการศึกษา พัฒนาผู้เรียนให้มีทักษะชีวิตและทักษะอาชีพตามหลักปรัชญาของเศรษฐกิจพอเพียง</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 โรงเรียนราชประชานุเคราะห์ ๒๖ จังหวัดลำพูน</p>
+    </footer>
+
+</body>
+</html>

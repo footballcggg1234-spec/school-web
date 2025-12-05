@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ข่าวประชาสัมพันธ์ทั้งหมด - RPK26</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- Theme Colors --- */
+        :root {
+            --primary-red: #b30000;
+            --primary-yellow: #ffcc00;
+            --dark-blue: #002244;
+            --bg-gray: #f8f9fa;
+        }
+        body { font-family: 'Sarabun', sans-serif; margin: 0; background: var(--bg-gray); color: #333; }
+
+        /* --- Navbar (เหมือนหน้าอื่น) --- */
+        .top-bar { background-color: var(--primary-red); padding: 8px 20px; display: flex; justify-content: flex-end; }
+        .top-bar a { color: white; text-decoration: none; font-size: 0.9rem; }
+        nav { background: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        .logo-text h1 { margin: 0; font-size: 1.5rem; color: var(--primary-red); }
+        .logo-text p { margin: 0; font-size: 0.9rem; color: #666; }
+        nav ul { list-style: none; display: flex; gap: 30px; margin: 0; }
+        nav a { text-decoration: none; color: var(--dark-blue); font-weight: 600; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--primary-red); border-bottom: 2px solid var(--primary-red); }
+        .btn-apply-nav { background: var(--primary-yellow); color: var(--dark-blue); padding: 8px 20px; border-radius: 20px; }
+
+        /* --- Header --- */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 2.5rem; margin: 0; border-bottom: 4px solid var(--primary-yellow); padding-bottom: 5px; }
+
+        /* --- News List --- */
+        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
+        
+        .search-bar { margin-bottom: 30px; display: flex; justify-content: flex-end; }
+        .search-bar input { padding: 10px; border: 1px solid #ddd; border-radius: 5px; width: 250px; font-family: 'Sarabun'; }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .news-card {
+            background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s;
+            border-bottom: 4px solid transparent;
+        }
+        .news-card:hover { transform: translateY(-5px); border-bottom-color: var(--primary-red); }
+        .card-img { width: 100%; height: 200px; object-fit: cover; background: #eee; }
+        .card-body { padding: 20px; }
+        .card-cat { color: var(--primary-red); font-size: 0.8rem; font-weight: bold; text-transform: uppercase; background: #ffe6e6; padding: 3px 10px; border-radius: 20px; display: inline-block; margin-bottom: 10px; }
+        .card-title { font-size: 1.2rem; margin: 0 0 10px 0; color: #333; line-height: 1.4; }
+        .card-desc { color: #666; font-size: 0.9rem; line-height: 1.6; }
+        .read-more { display: block; margin-top: 15px; color: var(--dark-blue); font-weight: bold; text-decoration: none; }
+
+        footer { background: var(--dark-blue); color: white; text-align: center; padding: 20px; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar"><a href="login.html"><i class="fas fa-lock"></i> เข้าสู่ระบบเจ้าหน้าที่</a></div>
+    <nav>
+        <div class="logo-area">
+            <div style="width:40px; height:40px; background:var(--primary-red); border-radius:50%; display:flex; justify-content:center; align-items:center; color:white; font-weight:bold;">RPK</div>
+            <div class="logo-text"><h1>ราชประชานุเคราะห์ ๒๖</h1><p>จังหวัดลำพูน</p></div>
+        </div>
+        <ul>
+            <li><a href="index.html">หน้าแรก</a></li>
+            <li><a href="about.html">เกี่ยวกับโรงเรียน</a></li>
+            <li><a href="academics.html">วิชาการ</a></li>
+            <li><a href="student-affairs.html">กิจการนักเรียน</a></li>
+            <li><a href="admission.html" class="btn-apply-nav">รับสมัครนักเรียน</a></li>
+            <li><a href="contact.html">ติดต่อเรา</a></li>
+        </ul>
+    </nav>
+
+    <header class="page-header">
+        <h1>ข่าวประชาสัมพันธ์ทั้งหมด</h1>
+    </header>
+
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="🔍 ค้นหาหัวข้อข่าว..." onkeyup="searchNews()">
+        </div>
+
+        <div id="news-container" class="news-grid">
+            <p>กำลังโหลดข้อมูล...</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 โรงเรียนราชประชานุเคราะห์ ๒๖ จังหวัดลำพูน</p>
+    </footer>
+
+    <script>
+        let allNews = []; // เก็บข่าวทั้งหมดไว้ใช้ตอนค้นหา
+
+        async function fetchAllNews() {
+            try {
+                const response = await fetch('http://localhost:5000/api/news');
+                allNews = await response.json();
+                renderNews(allNews); // แสดงข่าวทั้งหมด
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('news-container').innerHTML = '<p style="color:red">เชื่อมต่อ Server ไม่ได้</p>';
+            }
+        }
+
+        function renderNews(newsList) {
+            const container = document.getElementById('news-container');
+            container.innerHTML = '';
+
+            if (newsList.length === 0) {
+                container.innerHTML = '<p>ไม่พบข้อมูลข่าว</p>';
+                return;
+            }
+
+            newsList.forEach(news => {
+                const imageUrl = news.imageUrl || 'https://via.placeholder.com/400x250?text=News';
+                
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.innerHTML = `
+                    <img src="${imageUrl}" class="card-img" alt="ข่าว">
+                    <div class="card-body">
+                        <span class="card-cat">${news.category}</span>
+                        <h3 class="card-title">${news.title}</h3>
+                        <p class="card-desc">${news.content.substring(0, 80)}...</p>
+                        <a href="#" class="read-more">อ่านเพิ่มเติม →</a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // ฟังก์ชันค้นหาข่าว (แถมให้!)
+        function searchNews() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const filteredNews = allNews.filter(news => 
+                news.title.toLowerCase().includes(searchText) || 
+                news.category.toLowerCase().includes(searchText)
+            );
+            renderNews(filteredNews);
+        }
+
+        fetchAllNews();
+    </script>
+</body>
+</html>

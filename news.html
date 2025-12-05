@@ -3,211 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ข่าวประชาสัมพันธ์ - ราชประชานุเคราะห์ ๒๖</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>ข่าวประชาสัมพันธ์ทั้งหมด - RPK26</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
-        body { font-family: 'Sarabun', sans-serif; background-color: #f8f9fa; }
-        
-        /* 1. แถบแดงด้านบนสุด */
-        .top-bar { background-color: #b30000; color: white; padding: 5px 0; font-size: 0.9rem; }
-        .top-bar a { color: white; text-decoration: none; margin-left: 15px; font-weight: 500; }
-        .top-bar a:hover { text-decoration: underline; }
-
-        /* 2. เมนูหลัก (Navbar) */
-        .navbar { background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.05); padding: 15px 0; }
-        .navbar-brand { display: flex; align-items: center; }
-        .brand-logo { 
-            background-color: #b30000; color: white; width: 45px; height: 45px; 
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            font-weight: bold; margin-right: 10px; font-size: 1.2rem;
+        /* --- Theme Colors --- */
+        :root {
+            --primary-red: #b30000;
+            --primary-yellow: #ffcc00;
+            --dark-blue: #002244;
+            --bg-gray: #f8f9fa;
         }
-        .brand-text h1 { font-size: 1.2rem; margin: 0; color: #b30000; font-weight: bold; }
-        .brand-text p { font-size: 0.8rem; margin: 0; color: #666; }
-        
-        .nav-link { color: #333 !important; font-weight: 500; margin: 0 10px; }
-        .nav-link:hover { color: #b30000 !important; }
-        .btn-register { 
-            background-color: #ffc107; color: #333 !important; 
-            font-weight: bold; border-radius: 20px; padding: 6px 20px; 
-        }
+        body { font-family: 'Sarabun', sans-serif; margin: 0; background: var(--bg-gray); color: #333; }
 
-        /* 3. แบนเนอร์หัวข้อ (Hero Section) */
+        /* --- Navbar (เหมือนหน้าอื่น) --- */
+        .top-bar { background-color: var(--primary-red); padding: 8px 20px; display: flex; justify-content: flex-end; }
+        .top-bar a { color: white; text-decoration: none; font-size: 0.9rem; }
+        nav { background: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        .logo-text h1 { margin: 0; font-size: 1.5rem; color: var(--primary-red); }
+        .logo-text p { margin: 0; font-size: 0.9rem; color: #666; }
+        nav ul { list-style: none; display: flex; gap: 30px; margin: 0; }
+        nav a { text-decoration: none; color: var(--dark-blue); font-weight: 600; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--primary-red); border-bottom: 2px solid var(--primary-red); }
+        .btn-apply-nav { background: var(--primary-yellow); color: var(--dark-blue); padding: 8px 20px; border-radius: 20px; }
+
+        /* --- Header --- */
         .page-header {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://placehold.co/1200x400/555/white?text=School+Activity');
-            background-size: cover;
-            background-position: center;
-            height: 300px;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            height: 250px;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             color: white;
-            margin-bottom: 40px;
+            text-align: center;
         }
-        .page-header h2 { 
-            font-weight: bold; font-size: 2.5rem; border-bottom: 3px solid #ffc107; 
-            padding-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
+        .page-header h1 { font-size: 2.5rem; margin: 0; border-bottom: 4px solid var(--primary-yellow); padding-bottom: 5px; }
 
-        /* 4. ช่องค้นหา */
-        .search-container { max-width: 500px; margin: 0 auto 50px auto; position: relative; }
-        .search-container input { 
-            border-radius: 5px; padding: 12px 20px; border: 1px solid #ddd; 
-            width: 100%; box-shadow: 0 2px 5px rgba(0,0,0,0.05); outline: none;
-        }
-        .search-container i { position: absolute; right: 20px; top: 15px; color: #888; }
-
-        /* 5. การ์ดข่าว */
-        .news-card { 
-            border: none; border-radius: 10px; overflow: hidden; background: white; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; height: 100%; 
-        }
-        .news-card:hover { transform: translateY(-5px); }
-        .news-img { height: 200px; object-fit: cover; width: 100%; background-color: #eee; }
-        .news-body { padding: 25px; }
+        /* --- News List --- */
+        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
         
-        .badge-category {
-            background-color: #ffe5e5; color: #d63384; font-size: 0.75rem; 
-            padding: 4px 10px; border-radius: 20px; font-weight: bold; margin-bottom: 10px; display: inline-block;
-        }
-        
-        .news-title { font-weight: bold; font-size: 1.15rem; margin-bottom: 10px; line-height: 1.4; color: #333; }
-        .news-desc { font-size: 0.9rem; color: #666; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .read-more { color: #002244; text-decoration: none; font-weight: bold; font-size: 0.9rem; display: flex; align-items: center; }
-        .read-more:hover { text-decoration: underline; }
-        .read-more i { margin-left: 5px; font-size: 0.8rem; }
+        .search-bar { margin-bottom: 30px; display: flex; justify-content: flex-end; }
+        .search-bar input { padding: 10px; border: 1px solid #ddd; border-radius: 5px; width: 250px; font-family: 'Sarabun'; }
 
-        /* Footer */
-        footer { background-color: #002244; color: white; padding: 30px 0; margin-top: 80px; font-size: 0.9rem; }
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .news-card {
+            background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s;
+            border-bottom: 4px solid transparent;
+        }
+        .news-card:hover { transform: translateY(-5px); border-bottom-color: var(--primary-red); }
+        .card-img { width: 100%; height: 200px; object-fit: cover; background: #eee; }
+        .card-body { padding: 20px; }
+        .card-cat { color: var(--primary-red); font-size: 0.8rem; font-weight: bold; text-transform: uppercase; background: #ffe6e6; padding: 3px 10px; border-radius: 20px; display: inline-block; margin-bottom: 10px; }
+        .card-title { font-size: 1.2rem; margin: 0 0 10px 0; color: #333; line-height: 1.4; }
+        .card-desc { color: #666; font-size: 0.9rem; line-height: 1.6; }
+        .read-more { display: block; margin-top: 15px; color: var(--dark-blue); font-weight: bold; text-decoration: none; }
+
+        footer { background: var(--dark-blue); color: white; text-align: center; padding: 20px; margin-top: 50px; }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <div class="container d-flex justify-content-end align-items-center">
-            <a href="admin.html"><i class="fas fa-lock"></i> เข้าสู่ระบบเจ้าหน้าที่</a>
+    <div class="top-bar"><a href="login.html"><i class="fas fa-lock"></i> เข้าสู่ระบบเจ้าหน้าที่</a></div>
+    <nav>
+        <div class="logo-area">
+            <div style="width:40px; height:40px; background:var(--primary-red); border-radius:50%; display:flex; justify-content:center; align-items:center; color:white; font-weight:bold;">RPK</div>
+            <div class="logo-text"><h1>ราชประชานุเคราะห์ ๒๖</h1><p>จังหวัดลำพูน</p></div>
         </div>
-    </div>
-
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <div class="brand-logo">RPK</div>
-                <div class="brand-text">
-                    <h1>ราชประชานุเคราะห์ ๒๖</h1>
-                    <p>จังหวัดลำพูน</p>
-                </div>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center">
-                    <li class="nav-item"><a class="nav-link" href="#">หน้าแรก</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">เกี่ยวกับโรงเรียน</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">วิชาการ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">กิจการนักเรียน</a></li>
-                    <li class="nav-item"><a class="nav-link btn-register" href="#">รับสมัครนักเรียน</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">ติดต่อเรา</a></li>
-                </ul>
-            </div>
-        </div>
+        <ul>
+            <li><a href="index.html">หน้าแรก</a></li>
+            <li><a href="about.html">เกี่ยวกับโรงเรียน</a></li>
+            <li><a href="academics.html">วิชาการ</a></li>
+            <li><a href="student-affairs.html">กิจการนักเรียน</a></li>
+            <li><a href="admission.html" class="btn-apply-nav">รับสมัครนักเรียน</a></li>
+            <li><a href="contact.html">ติดต่อเรา</a></li>
+        </ul>
     </nav>
 
     <header class="page-header">
-        <h2>ข่าวประชาสัมพันธ์ทั้งหมด</h2>
+        <h1>ข่าวประชาสัมพันธ์ทั้งหมด</h1>
     </header>
 
     <div class="container">
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="🔍 ค้นหาหัวข้อข่าว..." onkeyup="filterNews()">
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="🔍 ค้นหาหัวข้อข่าว..." onkeyup="searchNews()">
         </div>
 
-        <div class="row g-4" id="news-container">
-            <div class="col-12 text-center py-5">
-                <div class="spinner-border text-primary" role="status"></div>
-                <p class="mt-2 text-muted">กำลังโหลดข้อมูลข่าว...</p>
-            </div>
-        </div>
-        
-        <div id="error-message" class="text-center text-danger mt-4" style="display:none;">
-            <h4><i class="fas fa-exclamation-triangle"></i> เชื่อมต่อ Server ไม่ได้</h4>
-            <p>กรุณาตรวจสอบว่า Backend (server.js) รันอยู่หรือไม่</p>
+        <div id="news-container" class="news-grid">
+            <p>กำลังโหลดข้อมูล...</p>
         </div>
     </div>
 
-    <footer class="text-center">
-        <div class="container">
-            <p class="mb-0">© 2025 โรงเรียนราชประชานุเคราะห์ ๒๖ จังหวัดลำพูน</p>
-        </div>
+    <footer>
+        <p>© 2025 โรงเรียนราชประชานุเคราะห์ ๒๖ จังหวัดลำพูน</p>
     </footer>
 
     <script>
-        let allNewsData = [];
+        let allNews = []; // เก็บข่าวทั้งหมดไว้ใช้ตอนค้นหา
 
-        document.addEventListener('DOMContentLoaded', async () => {
-            const container = document.getElementById('news-container');
-            const errorDiv = document.getElementById('error-message');
-
+        async function fetchAllNews() {
             try {
-                // *** จุดสำคัญ: ใช้ /api/news เพื่อให้ทำงานได้ทั้ง Localhost และ Render ***
-                const response = await fetch('/api/news'); 
-                
-                if (!response.ok) throw new Error('Failed to fetch');
-                
-                allNewsData = await response.json();
-                renderNews(allNewsData); // แสดงผล
-
+                const response = await fetch('/api/news');
+                allNews = await response.json();
+                renderNews(allNews); // แสดงข่าวทั้งหมด
             } catch (error) {
                 console.error('Error:', error);
-                container.style.display = 'none'; // ซ่อนตัวโหลด
-                errorDiv.style.display = 'block'; // โชว์ข้อความ Error สีแดง
+                document.getElementById('news-container').innerHTML = '<p style="color:red">เชื่อมต่อ Server ไม่ได้</p>';
             }
-        });
+        }
 
         function renderNews(newsList) {
             const container = document.getElementById('news-container');
-            container.innerHTML = ''; // ล้างข้อมูลเก่า (เช่นตัวหมุนๆ)
+            container.innerHTML = '';
 
             if (newsList.length === 0) {
-                container.innerHTML = '<div class="col-12 text-center"><p class="text-muted">ยังไม่มีข่าวประชาสัมพันธ์ในขณะนี้</p></div>';
+                container.innerHTML = '<p>ไม่พบข้อมูลข่าว</p>';
                 return;
             }
 
             newsList.forEach(news => {
-                // เช็คว่ามีรูปไหม ถ้าไม่มีให้ใส่รูป placeholder
-                const imgUrl = news.imageUrl ? news.imageUrl : 'https://placehold.co/600x400?text=News';
+                const imageUrl = news.imageUrl || 'https://via.placeholder.com/400x250?text=News';
                 
-                const html = `
-                    <div class="col-md-4">
-                        <div class="news-card">
-                            <img src="${imgUrl}" class="news-img" alt="News Image" onerror="this.src='https://placehold.co/600x400?text=No+Image'">
-                            <div class="news-body">
-                                <span class="badge-category">${news.category || 'ทั่วไป'}</span>
-                                <h5 class="news-title">${news.title}</h5>
-                                <p class="news-desc">${news.content || ''}</p>
-                                <a href="#" class="read-more">อ่านเพิ่มเติม <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.innerHTML = `
+                    <img src="${imageUrl}" class="card-img" alt="ข่าว">
+                    <div class="card-body">
+                        <span class="card-cat">${news.category}</span>
+                        <h3 class="card-title">${news.title}</h3>
+                        <p class="card-desc">${news.content.substring(0, 80)}...</p>
+                        <a href="#" class="read-more">อ่านเพิ่มเติม →</a>
                     </div>
                 `;
-                container.innerHTML += html;
+                container.appendChild(card);
             });
         }
 
-        function filterNews() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = allNewsData.filter(news => 
-                news.title.toLowerCase().includes(query) || 
-                (news.content && news.content.toLowerCase().includes(query))
+        // ฟังก์ชันค้นหาข่าว (แถมให้!)
+        function searchNews() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const filteredNews = allNews.filter(news => 
+                news.title.toLowerCase().includes(searchText) || 
+                news.category.toLowerCase().includes(searchText)
             );
-            renderNews(filtered);
+            renderNews(filteredNews);
         }
-    </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        fetchAllNews();
+    </script>
 </body>
 </html>

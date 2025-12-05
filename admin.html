@@ -310,5 +310,54 @@
             tableContainer.innerHTML = tableHTML;
         }
     </script>
+    <script>
+    async function submitNews() {
+        // 1. ดึงค่าจากช่องต่างๆ ตาม ID (ถ้า ID ในหน้าเดิมชื่ออื่น ให้แก้ตรงนี้ให้ตรงกัน)
+        const titleVal = document.getElementById('title')?.value;
+        const contentVal = document.getElementById('content')?.value;
+        const imageUrlVal = document.getElementById('imageUrl')?.value;
+        const categoryVal = document.getElementById('category')?.value || 'General';
+
+        if (!titleVal || !contentVal) {
+            alert("กรุณากรอกหัวข้อและเนื้อหาข่าว");
+            return;
+        }
+
+        const formData = {
+            title: titleVal,
+            content: contentVal,
+            imageUrl: imageUrlVal,
+            category: categoryVal
+        };
+
+        try {
+            // 2. ส่งไปที่ Server
+            const response = await fetch('/api/news', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                alert('✅ บันทึกข่าวสำเร็จ!');
+                window.location.reload(); // รีเฟรชหน้าเมื่อเสร็จ
+            } else {
+                alert('❌ บันทึกไม่สำเร็จ');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('❌ เชื่อมต่อ Server ไม่ได้');
+        }
+    }
+
+    // ถ้าปุ่มเดิมของคุณเป็นแบบ <form> ให้เติมโค้ดนี้เพื่อกันมันรีเฟรชเอง
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitNews();
+        });
+    }
+</script>
 </body>
 </html>

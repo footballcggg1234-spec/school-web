@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
 const path = require('path');
 const path = require('path');
@@ -21,8 +22,10 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb+srv://admin:<db_password>@clu
 
 // เรียกใช้ Routes
 const newsRoutes = require('./routes/newsRoutes');
+const studentRoutes = require('./routes/studentRoutes');
 
 app.use('/api/news', newsRoutes);
+app.use('/api/students', studentRoutes);
 // app.use('/api/events', eventRoutes); // (ถ้ามี)
 
 // รัน Server

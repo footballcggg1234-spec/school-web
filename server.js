@@ -15,9 +15,14 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/schoolDB')
 .then(() => console.log('✅ Connected to MongoDB'))
 .catch(err => console.error('❌ MongoDB Error:', err));
 
-// เรียกใช้ Route ข่าวอย่างเดียว (อันอื่นตัดทิ้งกัน Error)
+// เรียกใช้ Routes
 const newsRoutes = require('./routes/newsRoutes');
+const eventRoutes = require('./routes/eventRoutes');
+const studentRoutes = require('./routes/studentRoutes');
+
 app.use('/api/news', newsRoutes);
+app.use('/api/events', eventRoutes);
+app.use('/api/students', studentRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -9,6 +9,6 @@ const newsSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-}); // <--- ตรงนี้ต้องมีวงเล็บปิดให้ครบ
+});
 
 module.exports = mongoose.model('News', newsSchema);

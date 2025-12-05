@@ -10,11 +10,32 @@
         body { font-family: 'Sarabun', sans-serif; margin: 0; background: #f4f6f9; display: flex; min-height: 100vh; }
         
         /* Sidebar (เมนูซ้าย) */
-        .sidebar { width: 250px; background: #002244; color: white; padding: 20px 0; flex-shrink: 0; }
+        .sidebar {
+            width: 250px;
+            background: #002244;
+            color: white;
+            padding: 20px 0;
+            flex-shrink: 0;
+        }
         .sidebar-header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; }
         .sidebar-header h3 { margin: 10px 0 0 0; color: #ffcc00; }
-        .menu-item { display: flex; align-items: center; padding: 15px 20px; color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: background 0.2s, color 0.2s; cursor: pointer; }
-        .menu-item:hover, .menu-item.active { background: #003366; color: white; border-left: 5px solid #ffcc00; padding-left: 15px; }
+        .sidebar-header p { margin: 0; font-size: 0.9em; opacity: 0.8; }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+        .menu-item:hover, .menu-item.active {
+            background: #003366;
+            color: white;
+            border-left: 5px solid #ffcc00;
+            padding-left: 15px;
+        }
         .menu-item i { margin-right: 10px; font-size: 1.1em; }
 
         /* Content Area */
@@ -27,12 +48,23 @@
         .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
         .card h3 { margin-top: 0; margin-bottom: 20px; color: #002244; border-bottom: 2px solid #ffcc00; display: inline-block; padding-bottom: 5px; }
 
+        /* Form Elements */
+        form label { display: block; margin-top: 15px; margin-bottom: 5px; font-weight: 600; color: #555; }
+        form input[type="text"], 
+        form input[type="date"],
+        form select, 
+        form textarea { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-family: 'Sarabun', sans-serif; }
+        form textarea { resize: vertical; }
+        .btn-submit { background: #007bff; color: white; padding: 12px 25px; border: none; border-radius: 4px; cursor: pointer; font-size: 1em; margin-top: 20px; transition: background 0.3s; }
+        .btn-submit:hover { background: #0056b3; }
+
         /* Table Style */
         .data-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         .data-table th, .data-table td { border: 1px solid #ddd; padding: 10px; text-align: left; }
         .data-table th { background-color: #e0e0e0; color: #333; font-weight: 700; }
         .data-table td { font-size: 0.9rem; }
         .data-table tr:nth-child(even) { background-color: #f9f9f9; }
+        .data-table .no-data { text-align: center; color: #888; padding: 30px; }
     </style>
 </head>
 <body>
@@ -43,27 +75,75 @@
             <p>โรงเรียน RPK26</p>
         </div>
         <div class="menu">
-            <a href="#" class="menu-item active" id="menuNews" onclick="showTab('news', this)"><i class="fas fa-newspaper"></i> เพิ่มข่าวสาร</a>
-            <a href="#" class="menu-item" id="menuEvent" onclick="showTab('event', this)"><i class="fas fa-calendar-alt"></i> เพิ่มกิจกรรม</a>
-            <a href="#" class="menu-item" id="menuStudent" onclick="showTab('student', this); fetchStudents();"><i class="fas fa-user-friends"></i> ข้อมูลนักเรียน</a>
-            <a href="login.html" class="menu-item" style="margin-top: 50px;"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a>
+            <a href="#" class="menu-item active" id="menuNews" onclick="showTab('news', this)">
+                <i class="fas fa-newspaper"></i> เพิ่มข่าวสาร
+            </a>
+            <a href="#" class="menu-item" id="menuEvent" onclick="showTab('event', this)">
+                <i class="fas fa-calendar-alt"></i> เพิ่มกิจกรรม
+            </a>
+            <a href="#" class="menu-item" id="menuStudent" onclick="showTab('student', this); fetchStudents();">
+                <i class="fas fa-user-friends"></i> ข้อมูลนักเรียน
+            </a>
+            <a href="login.html" class="menu-item" style="margin-top: 50px;">
+                <i class="fas fa-sign-out-alt"></i> ออกจากระบบ
+            </a>
         </div>
     </div>
 
     <div class="content">
-        <div class="header"><h2 id="currentTitle">จัดการข้อมูล: ข่าวสาร</h2></div>
+        <div class="header">
+            <h2 id="currentTitle">จัดการข้อมูล: ข่าวสาร</h2>
+        </div>
 
         <div class="card-container" id="newsContainer">
             <div class="card">
                 <h3><i class="fas fa-newspaper"></i> ฟอร์มเพิ่มข่าวสารใหม่</h3>
-                <form id="newsForm"><button type="submit" class="btn-submit" style="background:#b30000;"><i class="fas fa-save"></i> บันทึกข้อมูล</button><p id="newsMsg" style="margin-top:15px; font-weight:bold;"></p></form>
+                <form id="newsForm">
+                    <label for="title">หัวข้อข่าว</label>
+                    <input type="text" id="title" name="title" required>
+
+                    <label for="category">หมวดหมู่</label>
+                    <select id="category" name="category" required>
+                        <option value="ทั่วไป">ทั่วไป</option>
+                        <option value="วิชาการ">วิชาการ</option>
+                        <option value="กีฬา">กีฬา</option>
+                        <option value="กิจกรรม">กิจกรรม</option>
+                    </select>
+
+                    <label for="imageUrl">ลิงก์รูปภาพ (URL)</label>
+                    <input type="text" id="imageUrl" name="imageUrl">
+
+                    <label for="content">เนื้อหาข่าว</label>
+                    <textarea id="content" name="content" rows="10" required></textarea>
+
+                    <button type="submit" class="btn-submit" style="background:#b30000;"><i class="fas fa-save"></i> บันทึกข้อมูล</button>
+                    <p id="newsMsg" style="margin-top:15px; font-weight:bold;"></p>
+                </form>
             </div>
         </div>
 
         <div class="card-container" id="eventContainer" style="display:none;">
             <div class="card">
                 <h3><i class="fas fa-calendar-alt"></i> ฟอร์มเพิ่มกิจกรรมใหม่</h3>
-                <form id="eventForm"><button type="submit" class="btn-submit" style="background:#007bff;"><i class="fas fa-save"></i> บันทึกกิจกรรม</button><p id="eventMsg" style="margin-top:15px; font-weight:bold;"></p></form>
+                <form id="eventForm">
+                    <label for="eventName">ชื่อกิจกรรม</label>
+                    <input type="text" id="eventName" name="eventName" required>
+
+                    <label for="eventDate">วันที่จัดกิจกรรม</label>
+                    <input type="date" id="eventDate" name="eventDate" required>
+
+                    <label for="eventLocation">สถานที่จัด</label>
+                    <input type="text" id="eventLocation" name="eventLocation">
+
+                    <label for="eventOrganizer">ผู้จัดงาน</label>
+                    <input type="text" id="eventOrganizer" name="eventOrganizer">
+                    
+                    <label for="eventDescription">รายละเอียด</label>
+                    <textarea id="eventDescription" name="eventDescription" rows="6"></textarea>
+
+                    <button type="submit" class="btn-submit" style="background:#007bff;"><i class="fas fa-save"></i> บันทึกกิจกรรม</button>
+                    <p id="eventMsg" style="margin-top:15px; font-weight:bold;"></p>
+                </form>
             </div>
         </div>
 
@@ -71,7 +151,7 @@
             <div class="card">
                 <h3><i class="fas fa-user-friends"></i> ข้อมูลนักเรียนทั้งหมด</h3>
                 <div id="studentTableContainer">
-                    <p style="text-align:center;">กำลังโหลดข้อมูลนักเรียน...</p>
+                    <p>กำลังโหลดข้อมูลนักเรียน...</p>
                 </div>
             </div>
         </div>
@@ -79,11 +159,94 @@
     </div>
 
     <script>
-        // *** โค้ดฟังก์ชันสลับแท็บ และฟอร์ม News/Event/Student (โค้ดนี้จะยาวมาก) ***
-        // NOTE: เนื่องจากผมไม่สามารถวางโค้ด JavaScript ที่ยาวมากๆ ในคำตอบนี้ได้หมด 
-        // รบกวนให้คุณ copy โค้ดฟังก์ชัน showTab, submit (News/Event), fetchStudents และ renderStudentTable 
-        // จากชุดโค้ด admin.html ก่อนหน้า (Turn 24) มาวางในแท็ก <script> นี้ต่อจากบรรทัดนี้ด้วยนะครับ
-        // (โดยเฉพาะส่วน fetchStudents ที่มี API /api/students จะทำให้ตารางแสดงผล)
+        // *** ฟังก์ชันสลับแท็บ ***
+        function showTab(tabName, clickedElement) {
+            // ซ่อน/แสดง Container
+            document.getElementById('newsContainer').style.display = 'none';
+            document.getElementById('eventContainer').style.display = 'none';
+            document.getElementById('studentContainer').style.display = 'none';
+            
+            if (tabName === 'news') document.getElementById('newsContainer').style.display = 'block';
+            if (tabName === 'event') document.getElementById('eventContainer').style.display = 'block';
+            if (tabName === 'student') {
+                 document.getElementById('studentContainer').style.display = 'block';
+                 fetchStudents(); // เรียกฟังก์ชันดึงข้อมูลเมื่อเปิดแท็บ
+            }
+            
+            // อัปเดต Title
+            document.getElementById('currentTitle').innerText = 
+                (tabName === 'news' ? 'จัดการข้อมูล: ข่าวสาร' : 
+                 tabName === 'event' ? 'จัดการข้อมูล: กิจกรรม' : 'จัดการข้อมูล: นักเรียน');
+            
+            // อัปเดต Active Menu
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            clickedElement.classList.add('active');
+        }
+        
+        // ให้แท็บข่าวสารทำงานเป็นค่าเริ่มต้น
+        document.addEventListener('DOMContentLoaded', () => {
+            showTab('news', document.getElementById('menuNews'));
+        });
+
+
+        // *** 1. โค้ดสำหรับส่ง "ข่าวสาร" ***
+        document.getElementById('newsForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                title: document.getElementById('title').value,
+                category: document.getElementById('category').value,
+                imageUrl: document.getElementById('imageUrl').value,
+                content: document.getElementById('content').value
+            };
+
+            try {
+                const response = await fetch('/api/news', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    document.getElementById('newsMsg').innerHTML = '<span style="color:green">✅ บันทึกสำเร็จ!</span>';
+                    document.getElementById('newsForm').reset();
+                } else {
+                    document.getElementById('newsMsg').innerHTML = '<span style="color:red">❌ บันทึกไม่สำเร็จ</span>';
+                }
+            } catch (err) {
+                document.getElementById('newsMsg').innerHTML = '<span style="color:red">❌ Server Error!</span>';
+            }
+        });
+
+        // *** 2. โค้ดสำหรับส่ง "กิจกรรม" ***
+        document.getElementById('eventForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('eventName').value,
+                date: document.getElementById('eventDate').value,
+                location: document.getElementById('eventLocation').value,
+                organizer: document.getElementById('eventOrganizer').value,
+                description: document.getElementById('eventDescription').value
+            };
+
+            try {
+                const response = await fetch('/api/events', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    document.getElementById('eventMsg').innerHTML = '<span style="color:green">✅ บันทึกสำเร็จ!</span>';
+                    document.getElementById('eventForm').reset();
+                } else {
+                    document.getElementById('eventMsg').innerHTML = '<span style="color:red">❌ บันทึกไม่สำเร็จ</span>';
+                }
+            } catch (err) {
+                document.getElementById('eventMsg').innerHTML = '<span style="color:red">❌ Server Error!</span>';
+            }
+        });
 
         // *** 3. โค้ดสำหรับดึง "ข้อมูลนักเรียน" ***
         async function fetchStudents() {
@@ -91,10 +254,11 @@
             tableContainer.innerHTML = '<p style="text-align:center;">กำลังโหลดข้อมูลนักเรียน...</p>';
             
             try {
-                const response = await fetch('/api/news');
+                const response = await fetch('/api/students'); // API ที่เราสร้าง
                 const students = await response.json();
 
                 if (students.length === 0) {
+                    // หาก DB ว่างเปล่า ให้ใส่ข้อมูลจำลองเพื่อให้เห็นตาราง
                     const dummyStudents = [
                         { studentId: '68001', fullName: 'สมชาย รักเรียน', classLevel: 'ม.4/1', gpa: 3.55, entryYear: 2568 },
                         { studentId: '68002', fullName: 'สมหญิง ตั้งใจ', classLevel: 'ม.4/1', gpa: 3.88, entryYear: 2568 },
@@ -113,21 +277,38 @@
 
         function renderStudentTable(students) {
             const tableContainer = document.getElementById('studentTableContainer');
-            // (code to generate HTML table from students data)
-            let tableHTML = `<table class="data-table"><thead><tr><th>ID นักเรียน</th><th>ชื่อ-นามสกุล</th><th>ระดับชั้น</th><th>GPAX</th><th>ปีเข้าเรียน</th></tr></thead><tbody>`;
+            let tableHTML = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID นักเรียน</th>
+                            <th>ชื่อ-นามสกุล</th>
+                            <th>ระดับชั้น</th>
+                            <th>GPAX</th>
+                            <th>ปีเข้าเรียน</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
             students.forEach(student => {
-                tableHTML += `<tr><td>${student.studentId}</td><td>${student.fullName}</td><td>${student.classLevel}</td><td>${student.gpa.toFixed(2)}</td><td>${student.entryYear}</td></tr>`;
+                tableHTML += `
+                    <tr>
+                        <td>${student.studentId}</td>
+                        <td>${student.fullName}</td>
+                        <td>${student.classLevel}</td>
+                        <td>${student.gpa.toFixed(2)}</td>
+                        <td>${student.entryYear}</td>
+                    </tr>
+                `;
             });
-            tableHTML += `</tbody></table>`;
+
+            tableHTML += `
+                    </tbody>
+                </table>
+            `;
             tableContainer.innerHTML = tableHTML;
         }
-
-        // *** (ใส่โค้ด JS ส่วนที่เหลือของคุณที่นี่) ***
-
-        document.addEventListener('DOMContentLoaded', () => {
-            showTab('news', document.getElementById('menuNews'));
-        });
-
     </script>
 </body>
 </html>

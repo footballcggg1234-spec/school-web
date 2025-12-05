@@ -1,8 +1,4 @@
-// ในไฟล์ server.js (Final Fix)
-// ในไฟล์ server.js (Final Fix)
-
-// 1. นำเข้า path module (สำคัญสำหรับ Render)
-const path = require('path'); 
+const path = require('path'); // สำคัญมาก
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -10,29 +6,18 @@ const cors = require('cors');
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '/'))); // บรรทัดแก้ Cannot GET /
 
-// 2. FIX: สั่งให้ Express แจกไฟล์ HTML จาก Root Folder (แก้ปัญหา Cannot GET /)
-app.use(express.static(path.join(__dirname, '/'))); 
-
-// เชื่อมต่อ MongoDB
+// เชื่อมต่อ Database
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/schoolDB')
 .then(() => console.log('✅ Connected to MongoDB'))
-.catch(err => console.error('❌ MongoDB Connection Error:', err));
+.catch(err => console.error('❌ MongoDB Error:', err));
 
-// เรียกใช้ Routes
+// เรียกใช้ Route ข่าวอย่างเดียว (อันอื่นตัดทิ้งกัน Error)
 const newsRoutes = require('./routes/newsRoutes');
-const eventRoutes = require('./routes/eventRoutes'); 
-const studentRoutes = require('./routes/studentRoutes');
-
 app.use('/api/news', newsRoutes);
-app.use('/api/events', eventRoutes); 
-app.use('/api/students', studentRoutes); 
 
-// รัน Server
-const PORT = process.env.ENV || process.env.PORT || 5000; 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

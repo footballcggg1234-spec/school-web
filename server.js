@@ -1,4 +1,4 @@
-// 1. นำเข้า path module (สำคัญสำหรับ Render)
+// 1. นำเข้า path module (สำคัญที่สุด)
 const path = require('path'); 
 require('dotenv').config();
 const express = require('express');
@@ -14,7 +14,7 @@ app.use(express.json());
 // 2. FIX: สั่งให้ Express แจกไฟล์ HTML จาก Root Folder (แก้ปัญหา Cannot GET /)
 app.use(express.static(path.join(__dirname, '/'))); 
 
-// เชื่อมต่อ MongoDB (ไม่มี options เก่า)
+// เชื่อมต่อ MongoDB
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/schoolDB')
 .then(() => console.log('✅ Connected to MongoDB'))
 .catch(err => console.error('❌ MongoDB Connection Error:', err));

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const response = await fetch('/api/news');({
+const newsSchema = new mongoose.Schema({
     title: { type: String, required: true },
     content: { type: String, required: true },
     imageUrl: { type: String, default: '' },

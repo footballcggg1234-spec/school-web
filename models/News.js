@@ -5,10 +5,7 @@ const newsSchema = new mongoose.Schema({
     content: { type: String, required: true },
     imageUrl: { type: String, default: '' },
     category: { type: String, default: 'General' },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
+    createdAt: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('News', newsSchema);

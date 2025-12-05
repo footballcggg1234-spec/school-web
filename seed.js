@@ -2,12 +2,17 @@ const mongoose = require('mongoose');
 const News = require('./models/News');
 require('dotenv').config();
 
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/schoolDB')
-.then(() => {
-    console.log('Connected to DB...');
-    seedData();
-})
-.catch(err => console.log(err));
+async function main() {
+    try {
+        await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/schoolDB', { useNewUrlParser: true, useUnifiedTopology: true });
+        console.log('Connected to DB...');
+        await seedData();
+    } catch (err) {
+        console.error('DB connection error:', err);
+    } finally {
+        await mongoose.connection.close();
+    }
+}
 
 const seedData = async () => {
     const dummyNews = [
@@ -28,8 +33,12 @@ const seedData = async () => {
         await News.insertMany(dummyNews);
         console.log('✅ เพิ่มข้อมูลข่าวจำลองเรียบร้อย!'); // <--- ต้องขึ้นคำนี้
     } catch (e) {
-        console.log('Error:', e);
+        console.error('Error inserting seed data:', e);
+        throw e;
     }
-
-    mongoose.connection.close();
 };
+
+// Run the seeder when invoked directly
+if (require.main === module) {
+    main();
+}

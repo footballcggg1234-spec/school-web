@@ -61,7 +61,8 @@
         /* Table Style */
         .data-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         .data-table th, .data-table td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-        .data-table th { background-color: #f2f2f2; color: #333; font-weight: 700; }
+        .data-table th { background-color: #e0e0e0; color: #333; font-weight: 700; }
+        .data-table td { font-size: 0.9rem; }
         .data-table tr:nth-child(even) { background-color: #f9f9f9; }
         .data-table .no-data { text-align: center; color: #888; padding: 30px; }
     </style>
@@ -122,7 +123,29 @@
         </div>
 
         <div class="card-container" id="eventContainer" style="display:none;">
+            <div class="card">
+                <h3><i class="fas fa-calendar-alt"></i> ฟอร์มเพิ่มกิจกรรมใหม่</h3>
+                <form id="eventForm">
+                    <label for="eventName">ชื่อกิจกรรม</label>
+                    <input type="text" id="eventName" name="eventName" required>
+
+                    <label for="eventDate">วันที่จัดกิจกรรม</label>
+                    <input type="date" id="eventDate" name="eventDate" required>
+
+                    <label for="eventLocation">สถานที่จัด</label>
+                    <input type="text" id="eventLocation" name="eventLocation">
+
+                    <label for="eventOrganizer">ผู้จัดงาน</label>
+                    <input type="text" id="eventOrganizer" name="eventOrganizer">
+                    
+                    <label for="eventDescription">รายละเอียด</label>
+                    <textarea id="eventDescription" name="eventDescription" rows="6"></textarea>
+
+                    <button type="submit" class="btn-submit" style="background:#007bff;"><i class="fas fa-save"></i> บันทึกกิจกรรม</button>
+                    <p id="eventMsg" style="margin-top:15px; font-weight:bold;"></p>
+                </form>
             </div>
+        </div>
 
         <div class="card-container" id="studentContainer" style="display:none;">
             <div class="card">
@@ -167,11 +190,63 @@
             showTab('news', document.getElementById('menuNews'));
         });
 
+
         // *** 1. โค้ดสำหรับส่ง "ข่าวสาร" ***
-        // ... (โค้ดสำหรับส่งข่าวสารจาก admin.html เดิม) ...
+        document.getElementById('newsForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                title: document.getElementById('title').value,
+                category: document.getElementById('category').value,
+                imageUrl: document.getElementById('imageUrl').value,
+                content: document.getElementById('content').value
+            };
+
+            try {
+                const response = await fetch('/api/news', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    document.getElementById('newsMsg').innerHTML = '<span style="color:green">✅ บันทึกสำเร็จ!</span>';
+                    document.getElementById('newsForm').reset();
+                } else {
+                    document.getElementById('newsMsg').innerHTML = '<span style="color:red">❌ บันทึกไม่สำเร็จ</span>';
+                }
+            } catch (err) {
+                document.getElementById('newsMsg').innerHTML = '<span style="color:red">❌ Server Error!</span>';
+            }
+        });
 
         // *** 2. โค้ดสำหรับส่ง "กิจกรรม" ***
-        // ... (โค้ดสำหรับส่งกิจกรรมจาก admin.html เดิม) ...
+        document.getElementById('eventForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('eventName').value,
+                date: document.getElementById('eventDate').value,
+                location: document.getElementById('eventLocation').value,
+                organizer: document.getElementById('eventOrganizer').value,
+                description: document.getElementById('eventDescription').value
+            };
+
+            try {
+                const response = await fetch('/api/events', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    document.getElementById('eventMsg').innerHTML = '<span style="color:green">✅ บันทึกสำเร็จ!</span>';
+                    document.getElementById('eventForm').reset();
+                } else {
+                    document.getElementById('eventMsg').innerHTML = '<span style="color:red">❌ บันทึกไม่สำเร็จ</span>';
+                }
+            } catch (err) {
+                document.getElementById('eventMsg').innerHTML = '<span style="color:red">❌ Server Error!</span>';
+            }
+        });
 
         // *** 3. โค้ดสำหรับดึง "ข้อมูลนักเรียน" ***
         async function fetchStudents() {
@@ -179,19 +254,17 @@
             tableContainer.innerHTML = '<p style="text-align:center;">กำลังโหลดข้อมูลนักเรียน...</p>';
             
             try {
-                const response = await fetch('/api/students'); // API ใหม่
+                const response = await fetch('/api/students'); // API ที่เราสร้าง
                 const students = await response.json();
 
                 if (students.length === 0) {
-                    // หากฐานข้อมูลนักเรียนว่างเปล่า ให้ใส่ข้อมูลจำลองเข้าไป
-                    // (ทำใน frontend เพื่อให้เห็นตาราง)
+                    // หาก DB ว่างเปล่า ให้ใส่ข้อมูลจำลองเพื่อให้เห็นตาราง
                     const dummyStudents = [
                         { studentId: '68001', fullName: 'สมชาย รักเรียน', classLevel: 'ม.4/1', gpa: 3.55, entryYear: 2568 },
                         { studentId: '68002', fullName: 'สมหญิง ตั้งใจ', classLevel: 'ม.4/1', gpa: 3.88, entryYear: 2568 },
                         { studentId: '68003', fullName: 'เด็กดี มีวินัย', classLevel: 'ม.5/2', gpa: 2.90, entryYear: 2567 }
                     ];
                     renderStudentTable(dummyStudents);
-                    // หมายเหตุ: ในระบบจริง หากต้องการให้ข้อมูลแสดงจริง ต้องเพิ่มโค้ด POST ข้อมูลจริงเข้าไปใน MongoDB
                     return; 
                 }
 

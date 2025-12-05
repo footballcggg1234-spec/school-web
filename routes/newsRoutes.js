@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const News = require('../models/News');
+const News = require('../models/News'); // Path นี้สำคัญมาก
 
 // 1. ดึงข่าวทั้งหมด (GET)
 router.get('/', async (req, res) => {
     try {
-        const news = await News.find().sort({ createdAt: -1 }); // เรียงจากใหม่ไปเก่า
+        const news = await News.find().sort({ createdAt: -1 });
         res.json(news);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-// 3. ลบข่าว (DELETE)
+// 3. ลบข่าว (DELETE) - (โค้ดนี้เราไม่ได้ใช้ในหน้าเว็บ แต่มีไว้ใน API)
 router.delete('/:id', async (req, res) => {
     try {
         await News.findByIdAndDelete(req.params.id);

@@ -2,8 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const path = require('path');
-const path = require('path');
 const cors = require('cors');
 
 const app = express();
@@ -26,6 +24,7 @@ const studentRoutes = require('./routes/studentRoutes');
 
 app.use('/api/news', newsRoutes);
 app.use('/api/students', studentRoutes);
+app.use(express.static(path.join(__dirname, '/')));
 // app.use('/api/events', eventRoutes); // (ถ้ามี)
 
 // รัน Server

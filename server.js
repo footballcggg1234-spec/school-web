@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const path = require('path');
 const cors = require('cors');
 
 const app = express();
@@ -11,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // Serve frontend static files from project root (index.html is in the repo root)
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, '/')));
 
 // เชื่อมต่อ MongoDB
 mongoose.connect(process.env.MONGO_URI || 'mongodb+srv://admin:<db_password>@cluster0.8counxn.mongodb.net/?appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true })

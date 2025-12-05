@@ -19,98 +19,204 @@
         }
         .sidebar-header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; }
         .sidebar-header h3 { margin: 10px 0 0 0; color: #ffcc00; }
+        .sidebar-header p { margin: 0; font-size: 0.9em; opacity: 0.8; }
+
         .menu-item {
-            padding: 12px 25px;
-            color: #cfd8dc;
             display: flex;
             align-items: center;
+            padding: 15px 20px;
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            transition: 0.3s;
-            border-left: 4px solid transparent;
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer; /* เพิ่ม cursor เพื่อให้รู้ว่ากดได้ */
         }
         .menu-item:hover, .menu-item.active {
-            background: rgba(255,255,255,0.05);
+            background: #003366;
             color: white;
-            border-left-color: #ffcc00;
+            border-left: 5px solid #ffcc00;
+            padding-left: 15px;
         }
-        .menu-item i { width: 25px; }
+        .menu-item i {
+            margin-right: 10px;
+            font-size: 1.1em;
+        }
 
-        /* Content (เนื้อหาขวา) */
-        .main-content { flex-grow: 1; padding: 30px; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .header h1 { margin: 0; color: #333; font-size: 1.8rem; }
-        .btn-logout { background: #b30000; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 0.9rem; }
+        /* Content Area */
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .header h2 {
+            margin: 0;
+            color: #333;
+        }
 
-        /* Card Form */
-        .card { background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); padding: 30px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-weight: bold; margin-bottom: 8px; color: #555; }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-family: 'Sarabun'; box-sizing: border-box;
+        /* Card/Form Styling */
+        .card-container {
+            margin-top: 20px;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #002244;
+            border-bottom: 2px solid #ffcc00;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* Form Elements */
+        form label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        form input[type="text"], 
+        form input[type="date"],
+        form select, 
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: 'Sarabun', sans-serif;
+        }
+        form textarea {
+            resize: vertical;
         }
         .btn-submit {
-            background: #002244; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;
-            display: flex; align-items: center; gap: 10px;
+            background: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 20px;
+            transition: background 0.3s;
         }
-        .btn-submit:hover { background: #003366; }
+        .btn-submit:hover {
+            background: #0056b3;
+        }
     </style>
 </head>
 <body>
-
     <div class="sidebar">
         <div class="sidebar-header">
-            <div style="width:50px; height:50px; background:#b30000; border-radius:50%; margin:0 auto; display:flex; align-items:center; justify-content:center; font-weight:bold;">RPK</div>
-            <h3>ระบบจัดการ</h3>
+            <i class="fas fa-chart-line fa-2x" style="color:#ffcc00;"></i>
+            <h3>ADMIN PANEL</h3>
+            <p>โรงเรียน RPK26</p>
         </div>
-        <a href="#" class="menu-item active"><i class="fas fa-newspaper"></i> จัดการข่าวสาร</a>
-        <a href="#" class="menu-item"><i class="fas fa-calendar-alt"></i> ปฏิทินกิจกรรม</a>
-        <a href="#" class="menu-item"><i class="fas fa-users"></i> ข้อมูลนักเรียน</a>
-        <a href="index.html" class="menu-item"><i class="fas fa-globe"></i> ไปหน้าเว็บไซต์</a>
+        <div class="menu">
+            <a href="#" class="menu-item active" id="menuNews" onclick="showTab('news', this)">
+                <i class="fas fa-newspaper"></i> เพิ่มข่าวสาร
+            </a>
+            <a href="#" class="menu-item" id="menuEvent" onclick="showTab('event', this)">
+                <i class="fas fa-calendar-alt"></i> เพิ่มกิจกรรม
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-user-friends"></i> ข้อมูลนักเรียน
+            </a>
+            <a href="login.html" class="menu-item" style="margin-top: 50px;">
+                <i class="fas fa-sign-out-alt"></i> ออกจากระบบ
+            </a>
+        </div>
     </div>
 
-    <div class="main-content">
+    <div class="content">
         <div class="header">
-            <h1>จัดการข่าวสารประชาสัมพันธ์</h1>
-            <a href="index.html" class="btn-logout"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a>
+            <h2 id="currentTitle">จัดการข้อมูล: ข่าวสาร</h2>
         </div>
 
-        <div class="card">
-            <h2 style="margin-top:0; color:#b30000; border-bottom:1px solid #eee; padding-bottom:15px;">✍️ เขียนข่าวใหม่</h2>
-            
-            <form id="newsForm">
-                <div class="form-group">
-                    <label>หัวข้อข่าว</label>
-                    <input type="text" id="title" required placeholder="เช่น พิธีไหว้ครู ประจำปี 2568">
-                </div>
+        <div class="card-container" id="newsContainer">
+            <div class="card">
+                <h3><i class="fas fa-newspaper"></i> ฟอร์มเพิ่มข่าวสารใหม่</h3>
+                <form id="newsForm">
+                    <label for="title">หัวข้อข่าว</label>
+                    <input type="text" id="title" name="title" required>
 
-                <div class="form-row" style="display:flex; gap:20px;">
-                    <div class="form-group" style="flex:1;">
-                        <label>หมวดหมู่</label>
-                        <select id="category">
-                            <option value="ทั่วไป">ทั่วไป</option>
-                            <option value="วิชาการ">วิชาการ</option>
-                            <option value="กิจกรรม">กิจกรรม</option>
-                        </select>
-                    </div>
-                    <div class="form-group" style="flex:2;">
-                        <label>ลิงก์รูปภาพ (Image URL)</label>
-                        <input type="url" id="imageUrl" placeholder="https://...">
-                    </div>
-                </div>
+                    <label for="category">หมวดหมู่</label>
+                    <select id="category" name="category" required>
+                        <option value="ทั่วไป">ทั่วไป</option>
+                        <option value="วิชาการ">วิชาการ</option>
+                        <option value="กีฬา">กีฬา</option>
+                        <option value="กิจกรรม">กิจกรรม</option>
+                    </select>
 
-                <div class="form-group">
-                    <label>เนื้อหาข่าว</label>
-                    <textarea id="content" rows="6" required placeholder="รายละเอียดข่าว..."></textarea>
-                </div>
+                    <label for="imageUrl">ลิงก์รูปภาพ (URL)</label>
+                    <input type="text" id="imageUrl" name="imageUrl">
 
-                <button type="submit" class="btn-submit"><i class="fas fa-save"></i> บันทึกข้อมูล</button>
-                <p id="msg" style="margin-top:15px; font-weight:bold;"></p>
-            </form>
+                    <label for="content">เนื้อหาข่าว</label>
+                    <textarea id="content" name="content" rows="10" required></textarea>
+
+                    <button type="submit" class="btn-submit"><i class="fas fa-save"></i> บันทึกข้อมูล</button>
+                    <p id="newsMsg" style="margin-top:15px; font-weight:bold;"></p>
+                </form>
+            </div>
+        </div>
+
+        <div class="card-container" id="eventContainer" style="display:none;">
+            <div class="card">
+                <h3><i class="fas fa-calendar-alt"></i> ฟอร์มเพิ่มกิจกรรมใหม่</h3>
+                <form id="eventForm">
+                    <label for="eventName">ชื่อกิจกรรม</label>
+                    <input type="text" id="eventName" name="eventName" required>
+
+                    <label for="eventDate">วันที่จัดกิจกรรม</label>
+                    <input type="date" id="eventDate" name="eventDate" required>
+
+                    <label for="eventLocation">สถานที่จัด</label>
+                    <input type="text" id="eventLocation" name="eventLocation">
+
+                    <label for="eventOrganizer">ผู้จัดงาน</label>
+                    <input type="text" id="eventOrganizer" name="eventOrganizer">
+                    
+                    <label for="eventDescription">รายละเอียด</label>
+                    <textarea id="eventDescription" name="eventDescription" rows="6"></textarea>
+
+                    <button type="submit" class="btn-submit"><i class="fas fa-save"></i> บันทึกกิจกรรม</button>
+                    <p id="eventMsg" style="margin-top:15px; font-weight:bold;"></p>
+                </form>
+            </div>
         </div>
     </div>
 
     <script>
-        // โค้ดเดิมสำหรับส่งข้อมูลไป Backend
+        // *** ฟังก์ชันสลับแท็บ ***
+        function showTab(tabName, clickedElement) {
+            // ซ่อน/แสดง Container
+            document.getElementById('newsContainer').style.display = (tabName === 'news' ? 'block' : 'none');
+            document.getElementById('eventContainer').style.display = (tabName === 'event' ? 'block' : 'none');
+            
+            // อัปเดต Title
+            document.getElementById('currentTitle').innerText = 
+                (tabName === 'news' ? 'จัดการข้อมูล: ข่าวสาร' : 'จัดการข้อมูล: กิจกรรม');
+            
+            // อัปเดต Active Menu
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            clickedElement.classList.add('active');
+        }
+
+        // *** 1. โค้ดสำหรับส่ง "ข่าวสาร" ***
         document.getElementById('newsForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const data = {
@@ -121,17 +227,48 @@
             };
 
             try {
-                const response = await fetch('http://localhost:5000/api/news', {
+                // *** สำคัญ: เปลี่ยน localhost เป็น relative path ***
+                const response = await fetch('/api/news', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
 
                 if (response.ok) {
-                    document.getElementById('msg').innerHTML = '<span style="color:green">✅ บันทึกสำเร็จ!</span>';
+                    document.getElementById('newsMsg').innerHTML = '<span style="color:green">✅ บันทึกสำเร็จ!</span>';
                     document.getElementById('newsForm').reset();
                 } else {
-                    document.getElementById('msg').innerHTML = '<span style="color:red">❌ บันทึกไม่สำเร็จ</span>';
+                    document.getElementById('newsMsg').innerHTML = '<span style="color:red">❌ บันทึกไม่สำเร็จ</span>';
+                }
+            } catch (err) {
+                alert("เชื่อมต่อ Server ไม่ได้");
+            }
+        });
+
+        // *** 2. โค้ดสำหรับส่ง "กิจกรรม" ***
+        document.getElementById('eventForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('eventName').value,
+                date: document.getElementById('eventDate').value,
+                location: document.getElementById('eventLocation').value,
+                organizer: document.getElementById('eventOrganizer').value,
+                description: document.getElementById('eventDescription').value
+            };
+
+            try {
+                // *** ส่งข้อมูลไปที่ API กิจกรรม ***
+                const response = await fetch('/api/events', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    document.getElementById('eventMsg').innerHTML = '<span style="color:green">✅ บันทึกสำเร็จ!</span>';
+                    document.getElementById('eventForm').reset();
+                } else {
+                    document.getElementById('eventMsg').innerHTML = '<span style="color:red">❌ บันทึกไม่สำเร็จ</span>';
                 }
             } catch (err) {
                 alert("เชื่อมต่อ Server ไม่ได้");

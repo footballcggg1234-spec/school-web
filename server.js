@@ -29,3 +29,12 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+// ในไฟล์ server.js
+
+// ... (หลัง const newsRoutes = require('./routes/newsRoutes'); )
+const eventRoutes = require('./routes/eventRoutes'); // <-- เพิ่มบรรทัดนี้
+
+// ...
+app.use('/api/news', newsRoutes); 
+app.use('/api/events', eventRoutes); // <-- เพิ่มบรรทัดนี้
+// ...

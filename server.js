@@ -8,7 +8,7 @@ const app = express();
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json());app.use(express.static(path.join(__dirname, '/')));
 
 // Serve frontend static files from project root (index.html is in the repo root)
 app.use(express.static(path.join(__dirname, '/')));
@@ -24,7 +24,6 @@ const studentRoutes = require('./routes/studentRoutes');
 
 app.use('/api/news', newsRoutes);
 app.use('/api/students', studentRoutes);
-app.use(express.static(path.join(__dirname, '/')));
 // app.use('/api/events', eventRoutes); // (ถ้ามี)
 
 // รัน Server

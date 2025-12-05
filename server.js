@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '/'))); // บรรทัดแก้ Cannot GET /
 
 // เชื่อมต่อ Database
-mongoose.connect(process.env.MONGO_URI || 'mongodb+srv://admin:1234@cluster0.8counxn.mongodb.net/?appName=Cluster0')
+mongoose.connect(process.env.MONGO_URI || 'mongodb+srv://ises12345678927_db_user:rungradit@cluster0.yzy6h0n.mongodb.net/?appName=Cluster0')
 .then(() => console.log('✅ Connected to MongoDB'))
 .catch(err => console.error('❌ MongoDB Error:', err));
 

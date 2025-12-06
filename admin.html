@@ -215,7 +215,7 @@
             };
 
             try {
-                const response = await fetch('mongodb+srv://admin:rungradit@cluster0.8counxn.mongodb.net/?appName=Cluster0', {
+                const response = await fetch('/api/news', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)

@@ -176,10 +176,7 @@
             document.getElementById('eventContainer').style.display = 'none';
             document.getElementById('studentContainer').style.display = 'none';
             
-            if (tabName === 'news') {
-                document.getElementById('newsContainer').style.display = 'block';
-                fetchNews();
-            }
+            if (tabName === 'news') document.getElementById('newsContainer').style.display = 'block';
             if (tabName === 'event') document.getElementById('eventContainer').style.display = 'block';
             if (tabName === 'student') {
                  document.getElementById('studentContainer').style.display = 'block';
@@ -225,7 +222,7 @@
                     document.getElementById('newsMsg').innerHTML = '<span style="color:green">✅ บันทึกสำเร็จ!</span>';
                     document.getElementById('newsForm').reset();
                     // Refresh list
-                    fetchNews(school-web-u8cr.onrender.com/api/news);
+                    fetchNews(school-web-u8cr.onrender.com);
                 } else {
                     document.getElementById('newsMsg').innerHTML = '<span style="color:red">❌ บันทึกไม่สำเร็จ</span>';
                 }
@@ -324,77 +321,6 @@
             `;
             tableContainer.innerHTML = tableHTML;
         }
-
-        // === News management: fetch, render, delete ===
-        async function fetchNews() {
-            const container = document.getElementById('newsListContainer');
-            container.innerHTML = '<p>กำลังโหลดรายการข่าว...</p>';
-            try {
-                const res = await fetch('/api/news');
-                if (!res.ok) throw new Error('Failed to fetch news');
-                const news = await res.json();
-                renderNewsList(news);
-            } catch (err) {
-                container.innerHTML = '<p style="color:red">❌ ไม่สามารถดึงรายการข่าวได้</p>';
-            }
-        }
-
-        function renderNewsList(news) {
-            const container = document.getElementById('newsListContainer');
-            if (!news || news.length === 0) {
-                container.innerHTML = '<p class="no-data">ยังไม่มีข่าวในระบบ</p>';
-                return;
-            }
-
-            let html = `
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>หัวข้อ</th>
-                            <th>หมวด</th>
-                            <th>วันที่สร้าง</th>
-                            <th>การจัดการ</th>
-                        </tr>
-                    </thead>
-                    <tbody>`;
-
-            news.forEach(n => {
-                const created = new Date(n.createdAt).toLocaleString('th-TH');
-                html += `
-                    <tr>
-                        <td>${escapeHtml(n.title)}</td>
-                        <td>${escapeHtml(n.category || '')}</td>
-                        <td>${created}</td>
-                        <td><button class="btn-submit" style="background:#b30000; padding:6px 10px; font-size:0.9rem;" onclick="deleteNews('${n._id}')">ลบ</button></td>
-                    </tr>`;
-            });
-
-            html += '</tbody></table>';
-            container.innerHTML = html;
-        }
-
-        async function deleteNews(id) {
-            if (!confirm('ต้องการลบข่าวนี้ใช่หรือไม่?')) return;
-            try {
-                const res = await fetch('/api/news/' + id, { method: 'DELETE' });
-                if (!res.ok) throw new Error('Delete failed');
-                fetchNews();
-            } catch (err) {
-                alert('❌ ลบไม่สำเร็จ');
-            }
-        }
-
-        // small helper to avoid XSS when inserting into table
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str.replace(/[&<>"']/g, function (c) {
-                return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
-            });
-        }
-
-        // Expose deleteNews to global scope (onclick in table uses global)
-        window.deleteNews = deleteNews;
-
     </script>
 </body>
 </html>

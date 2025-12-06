@@ -107,7 +107,7 @@
 
         async function fetchAllNews() {
             try {
-                const response = await fetch('mongodb+srv://admin:rungradit@cluster0.8counxn.mongodb.net/?appName=Cluster0');
+                const response = await fetch('/api/news');
                 allNews = await response.json();
                 renderNews(allNews); // แสดงข่าวทั้งหมด
             } catch (error) {

@@ -176,7 +176,10 @@
             document.getElementById('eventContainer').style.display = 'none';
             document.getElementById('studentContainer').style.display = 'none';
             
-            if (tabName === 'news') document.getElementById('newsContainer').style.display = 'block';
+            if (tabName === 'news') {
+                document.getElementById('newsContainer').style.display = 'block';
+                fetchNews();
+            }
             if (tabName === 'event') document.getElementById('eventContainer').style.display = 'block';
             if (tabName === 'student') {
                  document.getElementById('studentContainer').style.display = 'block';
@@ -222,7 +225,7 @@
                     document.getElementById('newsMsg').innerHTML = '<span style="color:green">✅ บันทึกสำเร็จ!</span>';
                     document.getElementById('newsForm').reset();
                     // Refresh list
-                    fetchNews();
+                    fetchNews(school-web-u8cr.onrender.com/api/news);
                 } else {
                     document.getElementById('newsMsg').innerHTML = '<span style="color:red">❌ บันทึกไม่สำเร็จ</span>';
                 }
